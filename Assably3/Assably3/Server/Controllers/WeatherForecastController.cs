@@ -51,8 +51,8 @@ namespace Assably3.Server.Controllers
         }
 
 
-        [HttpGet("/kelvin/{numero}")] //entre llaves es un argumento
-        public string Kelvin(long numero)
+        [HttpGet("/kelvin/{numero}/{coco}")] //entre llaves es un argumento
+        public string Kelvin(long numero, string coco)
         {
 
             return "Tu numero de la suerte es: " + numero;
