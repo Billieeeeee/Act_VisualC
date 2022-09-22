@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Assably3.Server.Controllers
 {
@@ -51,12 +50,46 @@ namespace Assably3.Server.Controllers
         }
 
 
-        [HttpGet("/kelvin/{numero}/{coco}")] //entre llaves es un argumento
-        public string Kelvin(long numero, string coco)
+        [HttpGet("/kelvin/{numero}")] //entre llaves es un argumento
+        public string Kelvin(long numero)
         {
 
             return "Tu numero de la suerte es: " + numero;
 
+        }
+
+        [HttpGet("/kelvin/{numero}/{coco}")] //entre llaves es un argumento
+        public string Kelvin(long numero, string coco)
+        {
+
+            return "Tu numero de la suerte es: " + numero + " Cocoritter: " + coco;
+
+        }
+
+        [HttpGet("/op/{numeroA}/{numeroB}/{ope}")]
+        public Operacion Operaciones(int numeroA, int numeroB, string ope)
+        {
+
+            float resultado = 0;
+            switch (ope)
+            {
+
+                case "suma":
+                    resultado = numeroA + numeroB;
+                    break;
+                case "resta":
+                    resultado = numeroA - numeroB;
+                    break;
+                case "div":
+                    resultado = numeroA / numeroB;
+                    break;
+                case "mult":
+                    resultado = numeroA * numeroB;
+                    break;
+
+            }         
+
+            return new Operacion(numeroA, numeroB, resultado);
         }
 
 
