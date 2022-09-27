@@ -14,6 +14,11 @@ namespace Assably3.Shared
         private string operacionAritmetica;
         private float resultado;
 
+        public Operacion()
+        {
+
+        }
+
         public Operacion(int numeroA, int numeroB, float resultado)
         {
             this.numeroA = numeroA;
