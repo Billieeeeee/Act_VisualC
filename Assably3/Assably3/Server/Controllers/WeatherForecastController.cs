@@ -92,6 +92,31 @@ namespace Assably3.Server.Controllers
             return new Operacion(numeroA, numeroB, resultado);
         }
 
+        [HttpPost("/op")]
+        public Operacion OperacionesPost(Operacion operacion2)
+        {
+
+            switch (operacion2.OperacionAritmetica)
+            {
+
+                case "suma":
+                   operacion2.Resultado = operacion2.NumeroA + operacion2.NumeroB;
+                    break;
+                case "resta":
+                    operacion2.Resultado = operacion2.NumeroA - operacion2.NumeroB;
+                    break;
+                case "div":
+                    operacion2.Resultado = operacion2.NumeroA / operacion2.NumeroB;
+                    break;
+                case "mult":
+                    operacion2.Resultado = operacion2.NumeroA * operacion2.NumeroB;
+                    break;
+
+            }
+
+            return operacion2;
+        }
+
 
 
 
