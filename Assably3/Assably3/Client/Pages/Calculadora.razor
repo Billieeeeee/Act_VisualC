@@ -1,20 +1,24 @@
-﻿@page "/Calculadora"
-@using Assably3.Shared
+﻿@using Assably3.Shared
 @using System.Text.Json
 @inject HttpClient Http
-<h3>Calculator</h3>
+@page "/Calculadora"
+<h3>Calculadora</h3>
 
-<EditForm @onsubmit="Enviar" Model="@operacion">
+<EditForm Model="@operacion" Onsubmit="HandledValidSubmit">
 
     <InputNumber @bind-Value="operacion.NumeroA"></InputNumber><!--Union = binding-->
     <InputNumber @bind-Value="operacion.NumeroB"></InputNumber>
+    <label> Resultado: @operacion.Resultado</label>
+    <!--<InputNumber @bind-Value="operacion.Resultado"></InputNumber>-->
+    <InputNumber @bind-Value="operacion.OperacionAritmetica"></InputNumber>
+
     <!--Combobox-->
     <InputSelect @bind-Value="operacion.OperacionAritmetica">
         <option value="">Selecciona la operación deseada</option>
-        <option value="+">Suma</option>
-        <option value="-">Resta</option>
-        <option value="/">Divisón</option>
-        <option value="*">Multiplicación</option>
+        <option value="suma">Suma</option>
+        <option value="resta">Resta</option>
+        <option value="div">Divisón</option>
+        <option value="multi">Multiplicación</option>
     </InputSelect>
     <button type="submit">Enviar datos</button>
 
@@ -25,31 +29,21 @@
     Operacion operacion = new Operacion();
 
 
-    public async void handValidSubmit(){
+    public async Task HandledValidSubmit()
+    {
 
 
         String json = JsonSerializer.Serialize(operacion);
-
         HttpResponseMessage response = await Http.PostAsJsonAsync("op", operacion);
-        /*El objeto operacion crea una respuesta o tarea*/
-
-        Task tarea = response.Content.ReadFromJsonAsync<Operacion>();
 
         if (response.IsSuccessStatusCode)
         {
 
-            await response.Content.ReadFromJsonAsync<Operacion>();
+            operacion = await response.Content.ReadFromJsonAsync<Operacion>();
 
         }
 
-            else
-            {
 
-                //Todo manejar el error
-
-            }
-
-        
 
     }
 }
