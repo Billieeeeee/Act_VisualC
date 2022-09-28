@@ -1,10 +1,11 @@
-﻿@using Assably3.Shared
+﻿
+@using Assably3.Shared
 @using System.Text.Json
 @inject HttpClient Http
 @page "/Calculadora"
 <h3>Calculadora</h3>
 
-<EditForm Model="@operacion" Onsubmit="HandledValidSubmit">
+<EditForm Model="@operacion" OnSubmit="HandledValidSubmit">
 
     <InputNumber @bind-Value="operacion.NumeroA"></InputNumber><!--Union = binding-->
     <InputNumber @bind-Value="operacion.NumeroB"></InputNumber>
